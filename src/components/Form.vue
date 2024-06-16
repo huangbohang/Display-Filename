@@ -1,6 +1,7 @@
 <script>
   import { bitable,FieldType } from '@lark-base-open/js-sdk';
   import { ref, onMounted } from 'vue';
+  import { i18n } from '@/locales/i18n.js'
   import {
     ElButton,
     ElForm,
@@ -22,7 +23,7 @@
       const tableMetaList = ref([]);
       const options = ref([]);
       const selected_options = ref([]);
-      const addname = ref('文件名');
+      const addname = ref(i18n.global.t('wjm') );
 
       // const addRecord = async () => {
       //   const tableId = formData.value.table;
@@ -45,11 +46,12 @@
         selected_options.value = []
       };
       const exportall = async () => {
-        if(selected_options.value.length==0 || addname.length==0){
+        if(selected_options.value.length==0 || addname.value.length==0){
           await bitable.ui.showToast({
             toastType: "error",
-            message: '请完整填写表单！'
+            message: i18n.global.t('qwz')
           })
+          return 
         }
         const table = await bitable.base.getTableById(formData.value.table)
         var fieldslist = await table.getFieldMetaList()
@@ -85,7 +87,7 @@
         localStorage.setItem('selected_options', selected_options.value.join(','))
         await bitable.ui.showToast({
           toastType: "success",
-          message: '已更新文件名字段！'
+          message: i18n.global.t('ygx')
         })
       };
 
@@ -134,10 +136,10 @@
 
 <template>
     <el-form ref="form" class="form" :model="formData" label-position="top" >
-    <el-alert style="margin-bottom: 20px;background-color: #e1eaff;color: #606266;"  title="选择数据表中对应的附件字段，以导出对应的文件名到新的字段。新字段的名称为：原字段名称+新字段名称后缀" type="info" />
-    <el-alert style="margin-bottom: 20px;"  title="由于前端API有限，所以无法自动将新增字段移动到原字段附近，请手动调整字段顺序。" type="warning" />
-    <el-form-item label="选择数据表" size="large">
-        <el-select v-model="formData.table" placeholder="请选择数据表" style="width: 100%" @change='reloadOptions'>
+    <el-alert style="margin-bottom: 20px;background-color: #e1eaff;color: #606266;"  :title="$t('xzs')" type="info" />
+    <el-alert style="margin-bottom: 20px;"  :title="$t('yyq')" type="warning" />
+    <el-form-item :label="$t('qxz')" size="large">
+        <el-select v-model="formData.table" :placeholder="$t('qxz')" style="width: 100%" @change='reloadOptions'>
           <el-option
             v-for="meta in tableMetaList"
             :key="meta.id"
@@ -146,8 +148,8 @@
           />
         </el-select>
     </el-form-item>
-    <el-form-item label="选择需要导出文件名的字段" size="large">
-      <el-select v-model="selected_options" multiple placeholder="请选择" style="width: 100%">
+    <el-form-item :label="$t('xzx')" size="large">
+      <el-select v-model="selected_options" multiple :placeholder="$t('xzx')" style="width: 100%">
         <el-option
           v-for="item in options"
           :key="item.value"
@@ -156,10 +158,10 @@
         </el-option>
       </el-select>
     </el-form-item>
-    <el-form-item label="新字段名称后缀" size="large" >
+    <el-form-item :label="$t('xzd')" size="large" >
       <el-input v-model="addname" placeholder=""></el-input>
     </el-form-item>
-    <el-button type="primary" plain size="large" @click="exportall" style='width:100%'>导出</el-button>
+    <el-button type="primary" plain size="large" @click="exportall" style='width:100%'>{{$t('dc')}}</el-button>
   </el-form>
 </template>
 

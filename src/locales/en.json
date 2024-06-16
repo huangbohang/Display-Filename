@@ -1,3 +1,13 @@
 {
-  "title":"title"
+  "wjm":"Filename",
+  "qwz":"Please fill out the form!",
+  "ygx":"Updated file name field!",
+  "xzs":"Select the corresponding attachment field in the data table to export the corresponding file name to a new field. The name of the new field is: original field name+new field name suffix",
+  "yyq":"Due to limited front-end APIs, it is not possible to automatically move new fields near the original field. Please manually adjust the field order.",
+  "xzs":"Select a data table and an attachment field, and set the suffix of the generated new field to add an attachment name field corresponding to the attachment field",
+  "qxz":"Please select a data table",
+  "xzx":"Select the fields that require exporting file names",
+  "qx":"Please select",
+  "xzd":"New Field Name Suffix",
+  "dc":"Export"
 }
