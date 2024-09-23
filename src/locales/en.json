@@ -9,5 +9,7 @@
   "xzx":"Select the fields that require exporting file names",
   "qx":"Please select",
   "xzd":"New Field Name Suffix",
-  "dc":"Export"
+  "dc":"Export",
+  "progress":"{{num}} items of data have been processed"
+
 }
